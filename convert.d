@@ -1,39 +1,34 @@
 import std.stdio, std.file, std.algorithm, std.string, std.array;
 
-int main(string[] args) {
+void main(string[] args) {
   //welcome
-  std.stdio.write("=== GC to PC Chao Converter v1.0 by TheGag96 ===\n",
-                  "Name of .chao file from Fusion Chao Editor: ");
+  std.stdio.write("=== GC to PC Chao Converter v1.0 by TheGag96 ===\n\n");
   
-  //read filename, check for validity
-  string gcFilename = readln.strip;
-  while (!gcFilename.isFile) {
-    write("That file doesn't exist. Try again:");
-    gcFilename = readln.strip; 
+  //convert each .chao file in the current directory
+  foreach (string filename; dirEntries(".", "*.chao", SpanMode.shallow)) {
+    //skip if this is a fixed chao
+    if (filename.endsWith("_fixed.chao")) continue;
+    
+    //read in file
+    auto chaoFile = cast(ubyte[]) read(filename); 
+    string newFilename = filename.replace(".chao", "_fixed.chao");
+    
+    //convert file (moved to a separate function for clarity)
+    writeln("Converting ", filename, " to new file ", newFilename); 
+    chaoFile.convert;
+    
+    //write out converted file
+    std.file.write(newFilename, chaoFile);
+    if (newFilename.isFile) writeln("Convert was a success!");
+    else { 
+      writeln("Something went wrong writing the file...");
+    }
   }
   
-  writeln("Beginning conversion...");
+  writeln("\nDone.\n",
+          "Now re-import each Chao into Fusion Chao Editor.\n",
+          "Have fun with your migrated Chao!");
   
-  //read in file
-  auto gcFile = cast(ubyte[]) read(gcFilename);
-  
-  //convert file (moved to a separate function for clarity)
-  gcFile.convert;
-  
-  //write out converted file
-  string fixedFilename = gcFilename.replace(".chao", "_fixed.chao");
-  std.file.write(fixedFilename, gcFile);
-  if (fixedFilename.isFile) writeln("Convert was a success!");
-  else { 
-    writeln("Something went wrong writing the file...");
-    return 1;
-  }
-  
-  writeln("The converted save was outputted to a file named \"SONIC2B__ALF\".\n",
-          "Now replace your old save in SteamApps\\common\\Sonic Adventure 2\\resource\\gd_PC\\SAVEDATA\n"
-          "Have fun with your beloved old Chao!");
-  
-  return 0;
 }
 
 void convert(ref ubyte[] file) {
