@@ -1,5 +1,5 @@
 /*
- *  GC to PC Chao Converter v1.0
+ *  GC to PC Chao Converter v1.1
  *  by TheGag96, 2015-07-26
  *  
  *  License: Do whatever you want with it.
@@ -9,7 +9,7 @@ import std.stdio, std.file, std.algorithm, std.string, std.array;
 
 void main(string[] args) {
   //welcome
-  std.stdio.write("=== GC to PC Chao Converter v1.0 by TheGag96 ===\n\n");
+  std.stdio.write("=== GC to PC Chao Converter v1.1 by TheGag96 ===\n\n");
   
   //convert each .chao file in the current directory
   foreach (string filename; dirEntries(".", "*.chao", SpanMode.shallow)) {
@@ -70,6 +70,11 @@ void convert(ref ubyte[] file) {
   
   //doctor medal
   swap(file[0x148], file[0x149]);
+  
+  //chao karate wins, losses, and draws
+  swap(file[0x150], file[0x151]);
+  swap(file[0x152], file[0x153]);
+  swap(file[0x154], file[0x155]);
   
   //animal (3-byte reversal)
   swap(file[0x159], file[0x15B]);
