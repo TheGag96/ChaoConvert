@@ -1,3 +1,10 @@
+/*
+ *  GC to PC Chao Converter v1.0
+ *  by TheGag96, 2015-07-26
+ *  
+ *  License: Do whatever you want with it.
+ */
+ 
 import std.stdio, std.file, std.algorithm, std.string, std.array;
 
 void main(string[] args) {
@@ -19,14 +26,11 @@ void main(string[] args) {
     
     //write out converted file
     std.file.write(newFilename, chaoFile);
-    if (newFilename.isFile) writeln("Convert was a success!");
-    else { 
-      writeln("Something went wrong writing the file...");
-    }
+    if (!newFilename.isFile) writeln("Something went wrong writing the file...");
   }
   
   writeln("\nDone.\n",
-          "Now re-import each Chao into Fusion Chao Editor.\n",
+          "Now re-import each Chao into Fusion Chao Editor with their fixed Chao.\n",
           "Have fun with your migrated Chao!");
   
 }
