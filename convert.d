@@ -30,7 +30,7 @@ void main(string[] args) {
   }
   
   writeln("\nDone.\n",
-          "Now re-import each Chao into Fusion Chao Editor with their fixed Chao.\n",
+          "Now re-import each Chao into Fusion Chao Editor with their fixed .chao file.\n",
           "Have fun with your migrated Chao!");
   
 }
