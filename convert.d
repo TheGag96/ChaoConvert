@@ -1,6 +1,6 @@
 /*
  *  GC to PC Chao Converter v1.1
- *  by TheGag96, 2015-07-26
+ *  by TheGag96, 2015-07-27
  *  
  *  License: Do whatever you want with it.
  */
@@ -76,8 +76,8 @@ void convert(ref ubyte[] file) {
   swap(file[0x152], file[0x153]);
   swap(file[0x154], file[0x155]);
   
-  //animal (3-byte reversal)
-  swap(file[0x159], file[0x15B]);
+  //animal behaviors (3-byte reversal)
+  swap(file[0x158], file[0x15A]);
   
   //sleepiness, tiredness, hunger, mate, boredom, energy, toys
   swap(file[0x174], file[0x175]);
