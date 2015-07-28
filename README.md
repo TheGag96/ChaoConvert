@@ -3,7 +3,7 @@ This is a program that converts broken Fusion's Chao Editor .chao files imported
 Before, this had to be done by hand with a hex editor, but no more!
 
 #Download
-[Stable release](https://github.com/TheGag96/ChaoConvert/releases/download/v1.0/ChaoConvert.v1.0.zip)
+[Stable release](https://github.com/TheGag96/ChaoConvert/releases/download/v1.1/ChaoConvert.v1.1.zip)
 
 #Usage
 * Begin by following [this guide](http://steamcommunity.com/sharedfiles/filedetails/?id=444918749&insideModal=1) until you're done exporting all your corrupted Chao's files from Fusion Chao Editor.
