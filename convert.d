@@ -37,54 +37,63 @@ void main(string[] args) {
 
 void convert(ref ubyte[] file) {
   //swap swim, fly, run, power, stamina, intelligence, and luck
-  swap(file[0x78], file[0x79]);
-  swap(file[0x7A], file[0x7B]);
-  swap(file[0x7C], file[0x7D]);
-  swap(file[0x7E], file[0x7F]);
-  swap(file[0x80], file[0x81]);
-  swap(file[0x82], file[0x83]);
-  swap(file[0x84], file[0x85]);
+  file.flip(0x78);
+  file.flip(0x7A);
+  file.flip(0x7C);
+  file.flip(0x7E);
+  file.flip(0x80);
+  file.flip(0x82);
+  file.flip(0x84);
 
   //happiness, age, life1, life2, reincarnations
-  swap(file[0xC2], file[0xC3]);
-  swap(file[0xC6], file[0xC7]);
-  swap(file[0xCA], file[0xCB]);
-  swap(file[0xCC], file[0xCD]);
-  swap(file[0xCE], file[0xCF]);
+  file.flip(0xC2);
+  file.flip(0xC6);
+  file.flip(0xCA);
+  file.flip(0xCC);
+  file.flip(0xCE);
   
   //run/power (4-byte reversal)
-  swap(file[0xE8], file[0xEB]);
-  swap(file[0xE9], file[0xEA]);
+  file.reverse4(0xE8);
   
   //swim/fly (4-byte reversal)
-  swap(file[0xEC], file[0xEF]);
-  swap(file[0xED], file[0xEE]);
+  file.reverse4(0xEC);
   
   //dark/hero (4-byte reversal)
-  swap(file[0xF0], file[0xF3]);
-  swap(file[0xF1], file[0xF2]);
+  file.reverse4(0xF0);
   
   //magnitude (4-byte reversal)
-  swap(file[0x100], file[0x103]);
-  swap(file[0x101], file[0x102]);
+  file.reverse4(0x100);
   
   //doctor medal
-  swap(file[0x148], file[0x149]);
+  file.flip(0x148);
   
   //chao karate wins, losses, and draws
-  swap(file[0x150], file[0x151]);
-  swap(file[0x152], file[0x153]);
-  swap(file[0x154], file[0x155]);
+  file.flip(0x150);
+  file.flip(0x152);
+  file.flip(0x154);
   
   //animal behaviors (3-byte reversal)
-  swap(file[0x158], file[0x15A]);
+  file.reverse3(0x158);
   
   //sleepiness, tiredness, hunger, mate, boredom, energy, toys
-  swap(file[0x174], file[0x175]);
-  swap(file[0x176], file[0x177]);
-  swap(file[0x178], file[0x179]);
-  swap(file[0x17A], file[0x17B]);
-  swap(file[0x17C], file[0x17D]);
-  swap(file[0x188], file[0x189]);
-  swap(file[0x1A4], file[0x1A5]);
+  file.flip(0x174);
+  file.flip(0x176);
+  file.flip(0x178);
+  file.flip(0x17A);
+  file.flip(0x17C);
+  file.flip(0x188);
+  file.flip(0x1A4);
+}
+
+void flip(ref ubyte[] file, ulong address) {
+  swap(file[address], file[address+1]);
+}
+
+void reverse4(ref ubyte[] file, ulong address) {
+  swap(file[address], file[address+3]);
+  swap(file[address+1], file[address+2]);
+}
+
+void reverse3(ref ubyte[] file, ulong address) {
+  swap(file[address], file[address+2]);
 }
